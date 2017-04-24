@@ -124,7 +124,10 @@ int main(int argc, char* argv[]) {
     gt_pack_list.push_back(gt_package);
   }
 
-  // Create a Fusion EKF instance
+  cout << "Got here 2" << endl;
+
+
+    // Create a Fusion EKF instance
   FusionEKF fusionEKF;
 
   // used to compute the RMSE later
