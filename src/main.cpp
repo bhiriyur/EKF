@@ -124,9 +124,6 @@ int main(int argc, char* argv[]) {
     gt_pack_list.push_back(gt_package);
   }
 
-  cout << "Got here 2" << endl;
-
-
     // Create a Fusion EKF instance
   FusionEKF fusionEKF;
 

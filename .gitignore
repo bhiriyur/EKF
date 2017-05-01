@@ -3,9 +3,13 @@
 
 # build files
 build/
+cmake-build-debug/
 
 # editor config
 .vscode/
+.idea/
+ide_profiles/
+
 
 # Xcode
 *.pbxuser

@@ -54,7 +54,9 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 
     //check division by zero
     float denom = px*px + py*py;
+    std::cout << 'ASSERT BEFORE...';
     assert(denom > 0);
+    std::cout << 'DONE' << std::endl;
     float denom2 = sqrt(denom);
     float denom32 = pow(denom, 3/2);
 
