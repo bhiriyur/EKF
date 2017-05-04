@@ -49,7 +49,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     double vx = x_[2];
     double vy = x_[3];
     double rho = sqrt(px*px + py*py);
-    double phi = atan2(py, px);
+    double phi = atan2(py,px);
 
     double rhodot;
 
@@ -64,22 +64,23 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
                 phi,
                 rhodot;
     VectorXd y = z - z_pred;
+    // std::cout << "phi = " << phi << " | z = " << z(1) << " | y = " << y(1) << std::endl;
     if (y(1) > PI) {
-        y(1) = 2*PI - y(1);
+        y(1) = y(1) - 2*PI;
     } else if (y(1) < -PI) {
-        y(1) = 2*PI + y(1);
+        y(1) = y(1) + 2*PI;
     }
 
-    UpdateCommon(z,y);
+    UpdateCommon(z, y);
 
 }
 
 void KalmanFilter::UpdateCommon(const VectorXd &z, const VectorXd &y) {
     /*
-     * Common measurement update functionality for both LASER and RADAR
+     * Common measurement update for both LASER and RADAR
      */
     MatrixXd Ht_ = H_.transpose();
-    MatrixXd S = H_ * P_ * Ht_ + R_;
+    MatrixXd S = (H_ * P_ * Ht_) + R_;
     MatrixXd Si = S.inverse();
     MatrixXd PHt = P_ * Ht_;
     MatrixXd K = PHt * Si;

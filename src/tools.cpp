@@ -27,6 +27,8 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
         VectorXd diff(4);
         diff = (estimations[i]-ground_truth[i]).array().pow(2);
         rmse += diff;
+        float check = rmse(1) / estimations.size();
+        // std::cout << sqrt(check) << std::endl;
     }
 
     //calculate the mean
@@ -54,14 +56,15 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 
     //check division by zero
     double denom = px*px + py*py;
-    if (denom < 0.001) {
+    if (denom < 0.0001) {
+        std::cout << "DENOM-0" << std::endl;
         Hj <<   1, 1, 0, 0,
                 1, 1, 0, 0,
                 1, 1, 1, 1;
         return Hj;
     }
-    double denom2 = sqrt(denom);
-    double denom32 = pow(denom, 3/2);
+    double denom2 = std::sqrt(denom);
+    double denom32 = std::pow(denom, 1.5);
 
     //compute the Jacobian matrix
     double H11 = px/denom2;

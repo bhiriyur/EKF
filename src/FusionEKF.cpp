@@ -60,8 +60,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
         ekf_.P_ = MatrixXd(4, 4);
         ekf_.P_ << 1, 0,    0,    0,
                    0, 1,    0,    0,
-                   0, 0,  1000,    0,
-                   0, 0,    0,  1000;
+                   0, 0, 1000,    0,
+                   0, 0,    0, 1000;
 
         ekf_.x_ = VectorXd(4);
 
@@ -88,8 +88,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
             //set the state with the initial location and zero velocity
             ekf_.x_ << measurement_pack.raw_measurements_[0],
                        measurement_pack.raw_measurements_[1],
-                       0,
-                       0;
+                       1,
+                       1;
 
         }
 
